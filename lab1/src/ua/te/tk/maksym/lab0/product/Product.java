@@ -1,12 +1,13 @@
 package ua.te.tk.maksym.lab0.product;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Product {
     private int id;
     private String name;
     private String producer;
-    private double price;
+    private BigDecimal price;
     private int expiration;
     private int number;
 
@@ -20,22 +21,22 @@ public class Product {
         System.out.println("Enter producer product:");
         producer = s.nextLine();
         System.out.println("Enter price product:");
-        price = s.nextDouble();
+        price = s.nextBigDecimal();
         System.out.println("Enter expiration date in months:");
         expiration = s.nextInt();
         System.out.println("Enter number product:");
         number = s.nextInt();
     }
 
-    public Product(int _id, String _name, String _producer,
-                   double _price, int _expiration,
-                   int _number){
-        id = _id;
-        name = _name;
-        producer = _producer;
-        price = _price;
-        expiration = _expiration;
-       number    = _number;
+    public Product(int id, String name, String producer,
+                   BigDecimal price, int expiration,
+                   int number){
+        this.id = id;
+        this.name = name;
+        this.producer = producer;
+        this.price = price;
+        this.expiration = expiration;
+        this.number = number;
     }
 
     public int getId(){
@@ -52,7 +53,7 @@ public class Product {
     }
 
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

@@ -1,6 +1,7 @@
 package ua.te.tk.maksym.lab0;
 import ua.te.tk.maksym.lab0.product.Product;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
@@ -10,9 +11,9 @@ public class Main {
 
         main.showDateProduct();
 
-        main.showDateProductDown();
+        main.showProductsPriceLower();
 
-        main.showDateProductUp();
+        main.showProductsExpirationUp();
 
         main.printAll();
 
@@ -21,7 +22,7 @@ public class Main {
     public Main(){
         product = new Product[3];
 
-        product[0] = new Product (1,"Milk", "LimitCompany",50,12,150);
+        product[0] = new Product (1,"Milk", "LimitCompany", BigDecimal.valueOf(5.5),12,150);
         product[1] = new Product();
     }
     public void showDateProduct(){
@@ -31,31 +32,31 @@ public class Main {
         String nameIn = newName.nextLine();
         for (Product item: product) {
             if (item != null && item.getName().equals(nameIn))
-                System.out.println(item.toString());
+                System.out.println(item);
         }
 
     }
 
-    public void showDateProductDown(){
+    public void showProductsPriceLower(){
         System.out.println("---------------------------------------");
         System.out.println("Enter the price:");
         Scanner setPriceIn = new Scanner(System.in);
-        double newPrice = setPriceIn.nextDouble();
+        BigDecimal newPrice = setPriceIn.nextBigDecimal();
         for (Product item: product) {
-            if (item != null && item.getPrice() < newPrice)
-                System.out.println(item.toString());
+            if (item != null && item.getPrice().compareTo(newPrice) == -1)
+                System.out.println(item);
         }
 
     }
 
-    public void showDateProductUp(){
+    public void showProductsExpirationUp(){
         System.out.println("---------------------------------------");
         System.out.println("Enter the expiration date in months:");
         Scanner setExpirationIn = new Scanner(System.in);
         int newExpiration = setExpirationIn.nextInt();
         for (Product item: product) {
             if (item != null && item.getExpiration() > newExpiration)
-                System.out.println(item.toString());
+                System.out.println(item);
         }
 
     }
