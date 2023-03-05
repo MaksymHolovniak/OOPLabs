@@ -1,6 +1,8 @@
 package ua.te.tk.maksym.lab0.product;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Product {
@@ -8,8 +10,8 @@ public class Product {
     private String name;
     private String producer;
     private BigDecimal price;
-    private int expiration;
-    private int number;
+    private String expirationString;
+    private int mount;
 
     public Product(){
         Scanner s = new Scanner(System.in);
@@ -22,21 +24,23 @@ public class Product {
         producer = s.nextLine();
         System.out.println("Enter price product:");
         price = s.nextBigDecimal();
-        System.out.println("Enter expiration date in months:");
-        expiration = s.nextInt();
-        System.out.println("Enter number product:");
-        number = s.nextInt();
+        s.nextLine();
+        System.out.println("Enter expiration date[dd/MM/yyyy]: ");
+        expirationString = s.nextLine();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Enter mount product:");
+        mount = s.nextInt();
     }
 
     public Product(int id, String name, String producer,
-                   BigDecimal price, int expiration,
-                   int number){
+                   BigDecimal price, String expiration,
+                   int mount){
         this.id = id;
         this.name = name;
         this.producer = producer;
         this.price = price;
-        this.expiration = expiration;
-        this.number = number;
+        this.expirationString = expirationString;
+        this.mount = mount;
     }
 
     public int getId(){
@@ -57,13 +61,11 @@ public class Product {
         return price;
     }
 
-    public int getExpiration() {
-        return expiration;
-    }
+    public String getExpiration() { return expirationString; }
 
 
-    public int getNumber() {
-        return number;
+    public int getMount() {
+        return mount;
     }
 
 
@@ -71,8 +73,8 @@ public class Product {
     public String toString(){
         return "Phone {" + "id = " + id + ", name = " + name +
                 ", producer = " + producer +  ", price = " + price +
-                ", expiration date = " + expiration +  ", number = " +
-                number + "}";
+                ", expiration date = " + expirationString +  ", number = " +
+                mount + "}";
     }
 
 }

@@ -2,68 +2,89 @@ package ua.te.tk.maksym.lab0;
 import ua.te.tk.maksym.lab0.product.Product;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     private Product[] product;
+
     public static void main(String[] args) {
         Main main = new Main();
 
-        main.showDateProduct();
+        main.showProductByName();
 
-        main.showProductsPriceLower();
+        main.showProductsByPriceLower();
 
-        main.showProductsExpirationUp();
+        main.showProductsByExpirationDateUp();
 
         main.printAll();
 
     }
 
-    public Main(){
+    public Main() {
         product = new Product[3];
 
-        product[0] = new Product (1,"Milk", "LimitCompany", BigDecimal.valueOf(5.5),12,150);
+        product[0] = new Product();
         product[1] = new Product();
     }
-    public void showDateProduct(){
+
+    public void showProductByName() {
         System.out.println("---------------------------------------");
         System.out.println("Enter the name:");
         Scanner newName = new Scanner(System.in);
         String nameIn = newName.nextLine();
-        for (Product item: product) {
+        for (Product item : product) {
             if (item != null && item.getName().equals(nameIn))
                 System.out.println(item);
         }
 
     }
 
-    public void showProductsPriceLower(){
+    public void showProductsByPriceLower() {
         System.out.println("---------------------------------------");
         System.out.println("Enter the price:");
         Scanner setPriceIn = new Scanner(System.in);
         BigDecimal newPrice = setPriceIn.nextBigDecimal();
-        for (Product item: product) {
+        for (Product item : product) {
             if (item != null && item.getPrice().compareTo(newPrice) == -1)
                 System.out.println(item);
         }
-
     }
 
-    public void showProductsExpirationUp(){
+
+    public void showProductsByExpirationDateUp() {
         System.out.println("---------------------------------------");
-        System.out.println("Enter the expiration date in months:");
+        System.out.println("Enter expiration date[dd/MM/yyyy]: ");
         Scanner setExpirationIn = new Scanner(System.in);
-        int newExpiration = setExpirationIn.nextInt();
-        for (Product item: product) {
-            if (item != null && item.getExpiration() > newExpiration)
-                System.out.println(item);
+        String newExpirationString = setExpirationIn.nextLine();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date newExpiration;
+        try {
+            newExpiration = dateFormat.parse(newExpirationString);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use dd/MM/yyyy.");
+            return;
         }
 
+        for (Product item : product) {
+            if (item != null) {
+                try {
+                    Date expiration = dateFormat.parse(item.getExpiration());
+                    if (expiration.compareTo(newExpiration) > 0) {
+                        System.out.println(item);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid date format for product with ID " + item.getId() + ". Please use dd/MM/yyyy.");
+                }
+            }
+        }
     }
 
-    public void printAll(){
+    public void printAll() {
         System.out.println("---------------------------------------");
-        for (int i = 0; i< product.length; i++) {
+        System.out.println("---------------------------------------");
+        for (int i = 0; i < product.length; i++) {
             System.out.println(product[i]);
         }
 
