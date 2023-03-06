@@ -1,6 +1,7 @@
 package ua.te.tk.maksym.lab0.product;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -10,71 +11,104 @@ public class Product {
     private String name;
     private String producer;
     private BigDecimal price;
-    private String expirationString;
-    private int mount;
+    private Date expiration;
+    private int amount;
 
-    public Product(){
-        Scanner s = new Scanner(System.in);
+    public Product() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Product id:");
-        id = s.nextInt();
-        s.nextLine();
+        id = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Enter name product:");
-        name = s.nextLine();
+        name = scanner.nextLine();
         System.out.println("Enter producer product:");
-        producer = s.nextLine();
+        producer = scanner.nextLine();
         System.out.println("Enter price product:");
-        price = s.nextBigDecimal();
-        s.nextLine();
+        price = scanner.nextBigDecimal();
+        scanner.nextLine();
         System.out.println("Enter expiration date[dd/MM/yyyy]: ");
-        expirationString = s.nextLine();
+        String tempString = scanner.nextLine();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            expiration = dateFormat.parse(tempString);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Please use dd/MM/yyyy.");
+            expiration = new Date();
+        }
+
+
         System.out.println("Enter mount product:");
-        mount = s.nextInt();
+        amount = scanner.nextInt();
     }
 
-    public Product(int id, String name, String producer,
-                   BigDecimal price, String expiration,
-                   int mount){
+    public Product(int id, String name, String producer, BigDecimal price, Date expiration, int amount) {
         this.id = id;
         this.name = name;
         this.producer = producer;
         this.price = price;
-        this.expirationString = expirationString;
-        this.mount = mount;
+        this.expiration = expiration;
+        this.amount = amount;
     }
 
-    public int getId(){
-        return this.id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getProducer() {
         return producer;
     }
 
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public String getExpiration() { return expirationString; }
-
-
-    public int getMount() {
-        return mount;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-
-
-    public String toString(){
-        return "Phone {" + "id = " + id + ", name = " + name +
-                ", producer = " + producer +  ", price = " + price +
-                ", expiration date = " + expirationString +  ", number = " +
-                mount + "}";
+    public Date getExpiration() {
+        return expiration;
     }
 
+    public void setExpiration(Date expiration) {
+        this.expiration = expiration;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    @Override
+     public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", producer='" + producer + '\'' +
+                ", price=" + price +
+                ", expiration=" + expiration +
+                ", amount=" + amount +
+                '}';
+    }
 }
+
+

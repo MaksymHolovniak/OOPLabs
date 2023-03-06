@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    private Product[] product;
+    private Product[] products;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -16,26 +16,26 @@ public class Main {
 
         main.showProductsByPriceLower();
 
-        main.showProductsByExpirationDateUp();
+        main.showProductsByExpirationDateAfter();
 
         main.printAll();
 
     }
 
     public Main() {
-        product = new Product[3];
+        products = new Product[3];
 
-        product[0] = new Product();
-        product[1] = new Product();
+        products[0] = new Product();
+        products[1] = new Product();
     }
 
     public void showProductByName() {
         System.out.println("---------------------------------------");
         System.out.println("Enter the name:");
-        Scanner newName = new Scanner(System.in);
-        String nameIn = newName.nextLine();
-        for (Product item : product) {
-            if (item != null && item.getName().equals(nameIn))
+        Scanner scanner = new Scanner(System.in);
+        String newName= scanner.nextLine();
+        for (Product item : products) {
+            if (item != null && item.getName().equals(newName))
                 System.out.println(item);
         }
 
@@ -44,20 +44,19 @@ public class Main {
     public void showProductsByPriceLower() {
         System.out.println("---------------------------------------");
         System.out.println("Enter the price:");
-        Scanner setPriceIn = new Scanner(System.in);
-        BigDecimal newPrice = setPriceIn.nextBigDecimal();
-        for (Product item : product) {
+        Scanner scanner = new Scanner(System.in);
+        BigDecimal newPrice = scanner.nextBigDecimal();
+        for (Product item : products) {
             if (item != null && item.getPrice().compareTo(newPrice) == -1)
                 System.out.println(item);
         }
     }
 
-
-    public void showProductsByExpirationDateUp() {
+    public void showProductsByExpirationDateAfter() {
         System.out.println("---------------------------------------");
         System.out.println("Enter expiration date[dd/MM/yyyy]: ");
-        Scanner setExpirationIn = new Scanner(System.in);
-        String newExpirationString = setExpirationIn.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String newExpirationString = scanner.nextLine();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date newExpiration;
         try {
@@ -67,16 +66,9 @@ public class Main {
             return;
         }
 
-        for (Product item : product) {
-            if (item != null) {
-                try {
-                    Date expiration = dateFormat.parse(item.getExpiration());
-                    if (expiration.compareTo(newExpiration) > 0) {
+        for (Product item : products) {
+                    if (item != null && item.getExpiration().after(newExpiration)) {
                         System.out.println(item);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Invalid date format for product with ID " + item.getId() + ". Please use dd/MM/yyyy.");
-                }
             }
         }
     }
@@ -84,8 +76,8 @@ public class Main {
     public void printAll() {
         System.out.println("---------------------------------------");
         System.out.println("---------------------------------------");
-        for (int i = 0; i < product.length; i++) {
-            System.out.println(product[i]);
+        for (int i = 0; i < products.length; i++) {
+            System.out.println(products[i]);
         }
 
     }
