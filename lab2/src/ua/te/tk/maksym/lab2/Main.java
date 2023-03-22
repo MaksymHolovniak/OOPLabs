@@ -7,8 +7,7 @@ public class Main {
         TextChanger textChanger = new TextChanger();
         System.out.println("Початковий текст:");
         System.out.println(textChanger.getInitialText());
-        textChanger.deleteWordsByCondition();
         System.out.println("Текст після опрацювання:");
-        System.out.println(textChanger.getInitialText());
+        System.out.println(textChanger.deleteWordsByCondition());
     }
 }

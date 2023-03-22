@@ -27,20 +27,16 @@ public class TextChanger {
         return initialText;
     }
 
-    public void deleteWordsByCondition(){
+    public String deleteWordsByCondition(){
+        List<String> resultList = new ArrayList<String>(List.of(initialText.trim().split(" ")));
 
-        List<String> wordsToRemove = new ArrayList<>();
-
-        String[] words = initialText.trim().split(" ");
-
-        for (String word : words) {
+        for (int i = 0; i < resultList.size(); i++) {
+            String word = resultList.get(i);
             if (word.length() == length && consonants.indexOf(Character.toLowerCase(word.charAt(0))) != 1) {
-                wordsToRemove.add(word);
+                resultList.remove(i);
+                i--;
             }
         }
-
-        for (String wordToRemove : wordsToRemove) {
-            initialText = initialText.replace(wordToRemove, "");
-        }
+        return String.join(" ", resultList);
     }
 }
