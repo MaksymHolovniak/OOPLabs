@@ -4,10 +4,9 @@ import ua.te.tk.maksym.lab3.product.Product;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Date;
 
 public class Food extends Product {
-   private double expirationDate;
+    private double expirationDate;
     private String productComponents;
 
     public Food(int id, String name, String producer, BigDecimal price, String expiration, int amount, double expirationDate, String productComponents) throws ParseException {
@@ -37,7 +36,7 @@ public class Food extends Product {
         return "Food{" +
                 "[id=" + getId() +
                 "], [name='" + getName() + '\'' +
-                "], [producer='" +getProducer() + '\'' +
+                "], [producer='" + getProducer() + '\'' +
                 "], [price=" + getPrice() +
                 "], [expiration=" + getExpiration() +
                 "], [amount=" + getAmount() +

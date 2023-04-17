@@ -4,13 +4,13 @@ import ua.te.tk.maksym.lab3.product.Product;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Date;
 
 public class Clothing extends Product {
     private String size;
     private String view;
-    public  Clothing(int id, String name, String producer, BigDecimal price, String expiration, int amount, String size, String view) throws ParseException {
-        super(id,name,producer,price,expiration,amount);
+
+    public Clothing(int id, String name, String producer, BigDecimal price, String expiration, int amount, String size, String view) throws ParseException {
+        super(id, name, producer, price, expiration, amount);
         this.size = size;
         this.view = view;
     }
@@ -36,7 +36,7 @@ public class Clothing extends Product {
         return "Clothing{" +
                 "[id=" + getId() +
                 "], [name='" + getName() + '\'' +
-                "], [producer='" +getProducer() + '\'' +
+                "], [producer='" + getProducer() + '\'' +
                 "], [price=" + getPrice() +
                 "], [expiration=" + getExpiration() +
                 "], [amount=" + getAmount() +
